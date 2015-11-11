@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://zetauploader.zeta-software.de/webservices/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://zetauploader.zeta-software.de/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://zetauploader.zeta-software.de/webservices/">
+      <s:element name="SendFileEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sendInfo" type="tns:SendFileInformation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SendFileInformation">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileContent" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReceiverEMailAddresses" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMailSubject" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMailBody" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AdditionalRemarks" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendFileExResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SendFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileContent" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="receiverEMailAddresses" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="additionalRemarks" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendFileResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SendFileExSoapIn">
+    <wsdl:part name="parameters" element="tns:SendFileEx" />
+  </wsdl:message>
+  <wsdl:message name="SendFileExSoapOut">
+    <wsdl:part name="parameters" element="tns:SendFileExResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendFileSoapIn">
+    <wsdl:part name="parameters" element="tns:SendFile" />
+  </wsdl:message>
+  <wsdl:message name="SendFileSoapOut">
+    <wsdl:part name="parameters" element="tns:SendFileResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CommunicationSoap">
+    <wsdl:operation name="SendFileEx">
+      <wsdl:input message="tns:SendFileExSoapIn" />
+      <wsdl:output message="tns:SendFileExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFile">
+      <wsdl:input message="tns:SendFileSoapIn" />
+      <wsdl:output message="tns:SendFileSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CommunicationSoap" type="tns:CommunicationSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendFileEx">
+      <soap:operation soapAction="http://zetauploader.zeta-software.de/webservices/SendFileEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFile">
+      <soap:operation soapAction="http://zetauploader.zeta-software.de/webservices/SendFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CommunicationSoap12" type="tns:CommunicationSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendFileEx">
+      <soap12:operation soapAction="http://zetauploader.zeta-software.de/webservices/SendFileEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFile">
+      <soap12:operation soapAction="http://zetauploader.zeta-software.de/webservices/SendFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Communication">
+    <wsdl:port name="CommunicationSoap" binding="tns:CommunicationSoap">
+      <soap:address location="http://www.zeta-software.de/ZetaUploader/Communication.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CommunicationSoap12" binding="tns:CommunicationSoap12">
+      <soap12:address location="http://www.zeta-software.de/ZetaUploader/Communication.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,555 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D59D7BBF-98E1-40D0-A537-526A898F5CBF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZetaHelpDesk.Main</RootNamespace>
+    <AssemblyName>ZetaHelpDesk.Main</AssemblyName>
+    <StartupObject>ZetaHelpDesk.Main.Program</StartupObject>
+    <ApplicationIcon>Application.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TimeSpanPicker, Version=1.0.2021.20623, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\TimeSpanPicker.dll</HintPath>
+    </Reference>
+    <Reference Include="ZetaLib.Core, Version=1.0.2105.28107, Culture=neutral, PublicKeyToken=b1c2f5df5ee6aeb4">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\ZetaLib.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ZetaLib.Windows, Version=1.0.2105.28109, Culture=neutral, PublicKeyToken=b1c2f5df5ee6aeb4">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\ZetaLib.Windows.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationConfiguration.cs" />
+    <Compile Include="Code\DBObjects\Base.cs" />
+    <Compile Include="Code\DBObjects\CountryCode.cs" />
+    <Compile Include="Code\DBObjects\Crm\CrmAddress.cs" />
+    <Compile Include="Code\DBObjects\Crm\CrmPerson.cs" />
+    <Compile Include="Code\DBObjects\CustomerCompany.cs" />
+    <Compile Include="Code\DBObjects\CustomerCompanyProperty.cs" />
+    <Compile Include="Code\DBObjects\CustomerCompanySupportContract.cs" />
+    <Compile Include="Code\DBObjects\CustomerPerson.cs" />
+    <Compile Include="Code\DBObjects\Dummy.cs" />
+    <Compile Include="Code\DBObjects\Project.cs" />
+    <Compile Include="Code\DBObjects\ProjectTask.cs" />
+    <Compile Include="Code\DBObjects\Ticket.cs" />
+    <Compile Include="Code\DBObjects\TicketEvent.cs" />
+    <Compile Include="Code\DBObjects\User.cs" />
+    <Compile Include="Code\DBObjects\UserGroup.cs" />
+    <Compile Include="Code\ExRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Code\FileHelper.cs" />
+    <Compile Include="Code\FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\LockManager.cs" />
+    <Compile Include="Code\MiscHelper.cs" />
+    <Compile Include="Code\UpdateConverter.cs" />
+    <Compile Include="Code\VCard.cs" />
+    <Compile Include="Controls\CustomerCompanyInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomerCompanyInfoControl.Designer.cs">
+      <DependentUpon>CustomerCompanyInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomerCompanySupportContractInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomerCompanySupportContractInfoControl.Designer.cs">
+      <DependentUpon>CustomerCompanySupportContractInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomerPersonInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomerPersonInfoControl.Designer.cs">
+      <DependentUpon>CustomerPersonInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProjectInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ProjectInfoControl.Designer.cs">
+      <DependentUpon>ProjectInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProjectTaskInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ProjectTaskInfoControl.Designer.cs">
+      <DependentUpon>ProjectTaskInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReportBase.cs" />
+    <Compile Include="Controls\ReportControlAllTickets.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReportControlAllTickets.Designer.cs">
+      <DependentUpon>ReportControlAllTickets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReportControlBillableProjectTasks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReportControlBillableProjectTasks.Designer.cs">
+      <DependentUpon>ReportControlBillableProjectTasks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReportControlBillableTickets.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReportControlBillableTickets.Designer.cs">
+      <DependentUpon>ReportControlBillableTickets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReportControlHtmlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReportControlHtmlBase.Designer.cs">
+      <DependentUpon>ReportControlHtmlBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReportControlOpenTickets.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReportControlOpenTickets.Designer.cs">
+      <DependentUpon>ReportControlOpenTickets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TicketEventInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TicketEventInfoControl.Designer.cs">
+      <DependentUpon>TicketEventInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TicketInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TicketInfoControl.Designer.cs">
+      <DependentUpon>TicketInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomerCompanyEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerCompanyEditForm.Designer.cs">
+      <DependentUpon>CustomerCompanyEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomerPersonEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerPersonEditForm.Designer.cs">
+      <DependentUpon>CustomerPersonEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProjectEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProjectEditForm.Designer.cs">
+      <DependentUpon>ProjectEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProjectTaskEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProjectTaskEditForm.Designer.cs">
+      <DependentUpon>ProjectTaskEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SqlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SqlForm.Designer.cs">
+      <DependentUpon>SqlForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TicketEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TicketEditForm.Designer.cs">
+      <DependentUpon>TicketEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TicketEventEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TicketEventEditForm.Designer.cs">
+      <DependentUpon>TicketEventEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TicketQuickEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TicketQuickEditForm.Designer.cs">
+      <DependentUpon>TicketQuickEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserEditForm.Designer.cs">
+      <DependentUpon>UserEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserLoginForm.Designer.cs">
+      <DependentUpon>UserLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LocalSettings.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\CustomerCompanyInfoControl.resx">
+      <DependentUpon>CustomerCompanyInfoControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CustomerCompanySupportContractInfoControl.resx">
+      <DependentUpon>CustomerCompanySupportContractInfoControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CustomerPersonInfoControl.resx">
+      <DependentUpon>CustomerPersonInfoControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProjectInfoControl.resx">
+      <DependentUpon>ProjectInfoControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProjectTaskInfoControl.resx">
+      <DependentUpon>ProjectTaskInfoControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReportControlAllTickets.resx">
+      <DependentUpon>ReportControlAllTickets.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReportControlBillableProjectTasks.resx">
+      <DependentUpon>ReportControlBillableProjectTasks.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReportControlBillableTickets.resx">
+      <DependentUpon>ReportControlBillableTickets.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReportControlHtmlBase.resx">
+      <DependentUpon>ReportControlHtmlBase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReportControlOpenTickets.resx">
+      <DependentUpon>ReportControlOpenTickets.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TicketEventInfoControl.resx">
+      <DependentUpon>TicketEventInfoControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TicketInfoControl.resx">
+      <DependentUpon>TicketInfoControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerCompanyEditForm.resx">
+      <DependentUpon>CustomerCompanyEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerPersonEditForm.resx">
+      <DependentUpon>CustomerPersonEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ErrorForm.resx">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProjectEditForm.resx">
+      <DependentUpon>ProjectEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProjectTaskEditForm.resx">
+      <DependentUpon>ProjectTaskEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SqlForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SqlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TicketEditForm.resx">
+      <DependentUpon>TicketEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TicketEventEditForm.resx">
+      <DependentUpon>TicketEventEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TicketQuickEditForm.resx">
+      <DependentUpon>TicketQuickEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserEditForm.resx">
+      <DependentUpon>UserEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserLoginForm.resx">
+      <DependentUpon>UserLoginForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Web References\ZetaHelpDeskUpdate\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ZetaUploader\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Application.ico" />
+    <Content Include="Icons\24x24_task.gif" />
+    <Content Include="Icons\AddressBook.gif" />
+    <Content Include="Icons\AdjustSize.gif" />
+    <Content Include="Icons\AllFiles.gif" />
+    <Content Include="Icons\Application.gif" />
+    <Content Include="Icons\Application.ico" />
+    <Content Include="Icons\Attachment.gif" />
+    <Content Include="Icons\AttachmentSmall.gif" />
+    <Content Include="Icons\Checked.gif" />
+    <Content Include="Icons\Clip.gif" />
+    <Content Include="Icons\Copy.gif" />
+    <Content Include="Icons\Delete.gif" />
+    <Content Include="Icons\DeleteDocument.gif" />
+    <Content Include="Icons\DeleteFilter.gif" />
+    <Content Include="Icons\DeleteImage.gif" />
+    <Content Include="Icons\Develop\Logo.gif" />
+    <Content Include="Icons\Develop\__icon_new.gif" />
+    <Content Include="Icons\EditDocument.gif" />
+    <Content Include="Icons\Event.gif" />
+    <Content Include="Icons\EventClip.gif" />
+    <Content Include="Icons\Filter.gif" />
+    <Content Include="Icons\FilterUser.gif" />
+    <None Include="Icons\Find.png" />
+    <Content Include="Icons\FolderClosed.gif" />
+    <Content Include="Icons\FolderOpen.gif" />
+    <Content Include="Icons\Form.gif" />
+    <Content Include="Icons\Globe.gif" />
+    <Content Include="Icons\HotFolderClosed.gif" />
+    <Content Include="Icons\HotFolderClosedFlash.gif" />
+    <Content Include="Icons\HotFolderOpen.gif" />
+    <Content Include="Icons\i24x24_calendar.gif" />
+    <Content Include="Icons\i24x24_envelope.gif" />
+    <Content Include="Icons\i24x24_folder.gif" />
+    <Content Include="Icons\i24x24_folderletter.gif" />
+    <Content Include="Icons\i24x24_folders.gif" />
+    <Content Include="Icons\i24x24_options.gif" />
+    <Content Include="Icons\i24x24_personcard.gif" />
+    <Content Include="Icons\i24x24_task.gif" />
+    <Content Include="Icons\Image.gif" />
+    <Content Include="Icons\Incoming.gif" />
+    <Content Include="Icons\LoginTitlebar.png" />
+    <Content Include="Icons\Mail.gif" />
+    <Content Include="Icons\Mail2.gif" />
+    <Content Include="Icons\NewEvent.gif" />
+    <Content Include="Icons\NewGeneric.gif" />
+    <Content Include="Icons\NewMail.gif" />
+    <Content Include="Icons\NewMail2.gif" />
+    <Content Include="Icons\NewMail3.gif" />
+    <Content Include="Icons\NewPersonCard.gif" />
+    <Content Include="Icons\NewPersonsCard.gif" />
+    <Content Include="Icons\NewProject.gif" />
+    <Content Include="Icons\NewProjectTask.gif" />
+    <Content Include="Icons\NewTicket.gif" />
+    <Content Include="Icons\Open.gif" />
+    <Content Include="Icons\Outgoing.gif" />
+    <Content Include="Icons\Person.gif" />
+    <Content Include="Icons\PersonCard.gif" />
+    <Content Include="Icons\PersonsCard.gif" />
+    <Content Include="Icons\Present.gif" />
+    <Content Include="Icons\PresentBlink.gif" />
+    <Content Include="Icons\PreviewArea.gif" />
+    <Content Include="Icons\PreviewAreaZoom.gif" />
+    <Content Include="Icons\Project.gif" />
+    <Content Include="Icons\ProjectTask.gif" />
+    <Content Include="Icons\ProjectTaskClip.gif" />
+    <Content Include="Icons\Properties.gif" />
+    <Content Include="Icons\QuickTicket.gif" />
+    <Content Include="Icons\RefreshDocument.gif" />
+    <Content Include="Icons\Report.gif" />
+    <Content Include="Icons\ReportGray.png" />
+    <Content Include="Icons\Return.gif" />
+    <None Include="Icons\Run.png" />
+    <Content Include="Icons\Save.gif" />
+    <Content Include="Icons\SaveAdd.gif" />
+    <Content Include="Icons\SaveAll.gif" />
+    <Content Include="Icons\SaveDelete.gif" />
+    <Content Include="Icons\SaveID.gif" />
+    <Content Include="Icons\Scan.gif" />
+    <Content Include="Icons\Search.gif" />
+    <Content Include="Icons\Search2.gif" />
+    <Content Include="Icons\SearchImmediate.gif" />
+    <Content Include="Icons\Settings.gif" />
+    <Content Include="Icons\SmallEnvelopeClosed.gif" />
+    <Content Include="Icons\SmallEnvelopeOpen.gif" />
+    <Content Include="Icons\SphereGray.gif" />
+    <Content Include="Icons\SphereGreen.gif" />
+    <Content Include="Icons\SphereRed.gif" />
+    <Content Include="Icons\SphereYellow.gif" />
+    <Content Include="Icons\Star.gif" />
+    <Content Include="Icons\SupportContractGray.gif" />
+    <Content Include="Icons\SupportContractGreen.gif" />
+    <Content Include="Icons\SupportContractRed.gif" />
+    <Content Include="Icons\SupportContractYellow.gif" />
+    <Content Include="Icons\TableRelationships.gif" />
+    <Content Include="Icons\Task.gif" />
+    <Content Include="Icons\Ticket.gif" />
+    <Content Include="Icons\TicketAdd.gif" />
+    <Content Include="Icons\TicketClosedResolved.gif" />
+    <Content Include="Icons\TicketClosedUnresolved.gif" />
+    <Content Include="Icons\TicketOpen.gif" />
+    <Content Include="Icons\TicketOpenOvertime.gif" />
+    <Content Include="Icons\Tickets.gif" />
+    <Content Include="Icons\TicketsLock.gif" />
+    <Content Include="Icons\TicketsRelationship.gif" />
+    <Content Include="Icons\Undo.png" />
+    <None Include="Icons\Window.png" />
+    <Content Include="Icons\Zoom100.png" />
+    <Content Include="Icons\ZoomIn.gif" />
+    <Content Include="Icons\ZoomOut.gif" />
+    <None Include="Resources\update.png" />
+    <None Include="Web References\ZetaHelpDeskUpdate\GetZetaHelpDeskUpdate.disco" />
+    <None Include="Web References\ZetaHelpDeskUpdate\GetZetaHelpDeskUpdate.wsdl" />
+    <None Include="Web References\ZetaHelpDeskUpdate\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ZetaUploader\Communication.disco" />
+    <None Include="Resources\x.png" />
+    <None Include="Resources\app.png" />
+    <None Include="Resources\common_icon_arrow_down.ico" />
+    <None Include="Resources\db-02.png" />
+    <None Include="Resources\db-01.png" />
+    <None Include="Resources\large-db-04.png" />
+    <None Include="Web References\ZetaUploader\Communication.wsdl" />
+    <None Include="Web References\ZetaUploader\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://www.zeta-software.de/zetaHelpDesk/Update/GetZetaHelpDeskUpdate.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ZetaHelpDeskUpdate\</RelPath>
+      <UpdateFromURL>http://www.zeta-software.de/zetaHelpDesk/Update/GetZetaHelpDeskUpdate.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ZetaHelpDesk_Main_ZetaHelpDeskUpdate_GetZetaHelpDeskUpdate</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.zeta-software.de/ZetaUploader/Communication.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ZetaUploader\</RelPath>
+      <UpdateFromURL>http://www.zeta-software.de/ZetaUploader/Communication.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ZetaHelpDesk_Main_ZetaUploader_Communication</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

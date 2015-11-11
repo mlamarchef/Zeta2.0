@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ZetaHelpDesk.Main.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="HideWhenMinimized" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AutoSizeListViewColumns" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ZetaHelpDesk_Main_ZetaUploader_Communication" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.zeta-software.de/ZetaUploader/Communication.asmx</Value>
+    </Setting>
+    <Setting Name="ZetaHelpDesk_Main_ZetaHelpDeskUpdate_GetZetaHelpDeskUpdate" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.zeta-software.de/zetaHelpDesk/Update/GetZetaHelpDeskUpdate.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

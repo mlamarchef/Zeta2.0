@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://www.zeta-software.de/zetaHelpDesk/Update/GetZetaHelpDeskUpdate.asmx?wsdl" docRef="http://www.zeta-software.de/zetaHelpDesk/Update/GetZetaHelpDeskUpdate.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://www.zeta-software.de/zetaHelpDesk/Update/GetZetaHelpDeskUpdate.asmx" xmlns:q1="http://zeta-software.de/zetahelpdesk/" binding="q1:GetZetaHelpDeskUpdateSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://www.zeta-software.de/zetaHelpDesk/Update/GetZetaHelpDeskUpdate.asmx" xmlns:q2="http://zeta-software.de/zetahelpdesk/" binding="q2:GetZetaHelpDeskUpdateSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

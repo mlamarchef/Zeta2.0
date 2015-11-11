@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://zeta-software.de/zetahelpdesk/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://zeta-software.de/zetahelpdesk/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://zeta-software.de/zetahelpdesk/">
+      <s:element name="IsUpdatePresent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="currentVersionStringToCheckAgainst" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsUpdatePresentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsUpdatePresentResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadUpdate">
+        <s:complexType />
+      </s:element>
+      <s:element name="DownloadUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DownloadUpdateResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="IsUpdatePresentSoapIn">
+    <wsdl:part name="parameters" element="tns:IsUpdatePresent" />
+  </wsdl:message>
+  <wsdl:message name="IsUpdatePresentSoapOut">
+    <wsdl:part name="parameters" element="tns:IsUpdatePresentResponse" />
+  </wsdl:message>
+  <wsdl:message name="DownloadUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:DownloadUpdate" />
+  </wsdl:message>
+  <wsdl:message name="DownloadUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:DownloadUpdateResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GetZetaHelpDeskUpdateSoap">
+    <wsdl:operation name="IsUpdatePresent">
+      <wsdl:input message="tns:IsUpdatePresentSoapIn" />
+      <wsdl:output message="tns:IsUpdatePresentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadUpdate">
+      <wsdl:input message="tns:DownloadUpdateSoapIn" />
+      <wsdl:output message="tns:DownloadUpdateSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GetZetaHelpDeskUpdateSoap" type="tns:GetZetaHelpDeskUpdateSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IsUpdatePresent">
+      <soap:operation soapAction="http://zeta-software.de/zetahelpdesk/IsUpdatePresent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadUpdate">
+      <soap:operation soapAction="http://zeta-software.de/zetahelpdesk/DownloadUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GetZetaHelpDeskUpdateSoap12" type="tns:GetZetaHelpDeskUpdateSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IsUpdatePresent">
+      <soap12:operation soapAction="http://zeta-software.de/zetahelpdesk/IsUpdatePresent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadUpdate">
+      <soap12:operation soapAction="http://zeta-software.de/zetahelpdesk/DownloadUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GetZetaHelpDeskUpdate">
+    <wsdl:port name="GetZetaHelpDeskUpdateSoap" binding="tns:GetZetaHelpDeskUpdateSoap">
+      <soap:address location="http://www.zeta-software.de/zetaHelpDesk/Update/GetZetaHelpDeskUpdate.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GetZetaHelpDeskUpdateSoap12" binding="tns:GetZetaHelpDeskUpdateSoap12">
+      <soap12:address location="http://www.zeta-software.de/zetaHelpDesk/Update/GetZetaHelpDeskUpdate.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
